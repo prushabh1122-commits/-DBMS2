@@ -1,6 +1,6 @@
 SET SERVEROUTPUT ON;
 DECLARE
-v_roll NUMBER := 51;
+v_roll NUMBER := 1;
 v_p NUMBER := v_roll * 10000 + 50000;
 v_rate NUMBER := 9;
 v_years NUMBER := 5;
