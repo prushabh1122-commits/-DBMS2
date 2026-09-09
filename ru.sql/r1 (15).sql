@@ -1,6 +1,6 @@
 SET SERVEROUTPUT ON;
 DECLARE
-v_roll NUMBER := 51;
+v_roll NUMBER := 1;
 v_dept NUMBER := (MOD(v_roll, 6) + 1) * 10;
 v_cnt NUMBER;
 v_avg NUMBER;
