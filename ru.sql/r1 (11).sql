@@ -1,27 +1,17 @@
 SET SERVEROUTPUT ON;
-
 DECLARE
-    v_celsius NUMBER := 37;
-    v_fahrenheit NUMBER;
-    v_kelvin NUMBER;
-    v_f NUMBER := 98.6;
-    v_c NUMBER;
-
+v_roll NUMBER := 51;
+v_n NUMBER := MOD(v_roll, 12) + 1;
 BEGIN
-    -- Celsius to Fahrenheit
-    v_fahrenheit := v_celsius * 9 / 5 + 32;
-
-    -- Celsius to Kelvin
-    v_kelvin := v_celsius + 273.15;
-
-    -- Fahrenheit to Celsius
-    v_c := (v_f - 32) * 5 / 9;
-
-    -- Print values
-    DBMS_OUTPUT.PUT_LINE('Celsius: ' || v_celsius);
-    DBMS_OUTPUT.PUT_LINE('Fahrenheit: ' || ROUND(v_fahrenheit, 1));
-    DBMS_OUTPUT.PUT_LINE('Kelvin: ' || v_kelvin);
-    DBMS_OUTPUT.PUT_LINE('98.6 Fahrenheit = ' || ROUND(v_c, 0) || ' Celsius');
-
+DBMS_OUTPUT.PUT_LINE('Today: ' ||
+TO_CHAR(SYSDATE, 'Day, DDth Month YYYY'));
+DBMS_OUTPUT.PUT_LINE('After ' || v_n || ' month(s): ' ||
+TO_CHAR(ADD_MONTHS(SYSDATE, v_n), 'DD-MON-YYYY'));
+DBMS_OUTPUT.PUT_LINE('Last day of current month: ' ||
+TO_CHAR(LAST_DAY(SYSDATE), 'DD-MON-YYYY'));
+DBMS_OUTPUT.PUT_LINE('Next Monday: ' ||
+TO_CHAR(NEXT_DAY(SYSDATE, 'MONDAY'), 'DD-MON-YYYY'));
+DBMS_OUTPUT.PUT_LINE('Days left in this month: ' ||
+TRUNC(LAST_DAY(SYSDATE) - SYSDATE));
 END;
 /
