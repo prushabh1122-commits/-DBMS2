@@ -1,33 +1,33 @@
 SET SERVEROUTPUT ON;
-
 DECLARE
-    v_amount NUMBER := 2700;
-
-    n500 NUMBER;
-    n200 NUMBER;
-    n100 NUMBER;
-    v_rem NUMBER;
-
+v_roll NUMBER := 51;
+c_gst CONSTANT NUMBER := 18;
+v_index NUMBER := MOD(v_roll, 4) + 1;
+v_plan NUMBER;
+v_gst NUMBER;
+v_total NUMBER;
+v_plan_name VARCHAR2(30);
 BEGIN
-    -- Rs.500 notes
-    n500 := TRUNC(v_amount / 500);
-    v_rem := MOD(v_amount, 500);
-
-    -- Rs.200 notes
-    n200 := TRUNC(v_rem / 200);
-    v_rem := MOD(v_rem, 200);
-
-    -- Rs.100 notes
-    n100 := TRUNC(v_rem / 100);
-    v_rem := MOD(v_rem, 100);
-
-    -- Print note breakup
-    DBMS_OUTPUT.PUT_LINE('--- ATM NOTE BREAKUP ---');
-    DBMS_OUTPUT.PUT_LINE('Amount: Rs. ' || v_amount);
-    DBMS_OUTPUT.PUT_LINE('Rs.500 Notes: ' || n500);
-    DBMS_OUTPUT.PUT_LINE('Rs.200 Notes: ' || n200);
-    DBMS_OUTPUT.PUT_LINE('Rs.100 Notes: ' || n100);
-    DBMS_OUTPUT.PUT_LINE('Remaining Amount: Rs. ' || v_rem);
-
+v_plan := CASE v_index
+WHEN 1 THEN 199
+WHEN 2 THEN 299
+WHEN 3 THEN 399
+WHEN 4 THEN 599
+END;
+v_plan_name := 'Jio/Airtel Plan';
+v_gst := v_plan * c_gst / 100;
+v_total := v_plan + v_gst;
+DBMS_OUTPUT.PUT_LINE('--------------------------------');
+DBMS_OUTPUT.PUT_LINE(' MOBILE RECHARGE RECEIPT');
+DBMS_OUTPUT.PUT_LINE('--------------------------------');
+DBMS_OUTPUT.PUT_LINE(RPAD('Plan:', 15) || v_plan_name);
+DBMS_OUTPUT.PUT_LINE(RPAD('Base Price:', 15) ||
+TO_CHAR(v_plan, '99,999.99'));
+DBMS_OUTPUT.PUT_LINE(RPAD('GST @18%:', 15) ||
+TO_CHAR(v_gst, '99,999.99'));
+DBMS_OUTPUT.PUT_LINE(RPAD('Total:', 15) ||
+TO_CHAR(v_total, '99,999.99'));
+DBMS_OUTPUT.PUT_LINE('Validity: ' ||
+TO_CHAR(SYSDATE + 28, 'DD-MON-YYYY'));
 END;
 /
