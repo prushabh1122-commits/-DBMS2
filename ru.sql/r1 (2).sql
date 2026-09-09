@@ -1,7 +1,7 @@
 SET SERVEROUTPUT ON;
 
 DECLARE
-    v_name       VARCHAR2(50) := 'Manush';
+    v_name       VARCHAR2(50) := 'rushabh';
     v_marks      NUMBER(5,2) := 382;
     v_percentage NUMBER(5,2);
     v_dob        DATE := DATE '2007-01-01';
