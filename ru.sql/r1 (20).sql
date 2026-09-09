@@ -1,7 +1,7 @@
 SET SERVEROUTPUT ON;
 
 DECLARE
-    v_name VARCHAR2(50) := 'Manush Mistry';
+    v_name VARCHAR2(50) := 'rushabh';
     v_dob DATE := TO_DATE('15-05-2007', 'DD-MM-YYYY');
     v_roll NUMBER := 22;
 
