@@ -1,6 +1,6 @@
 SET SERVEROUTPUT ON;
 DECLARE
-v_roll NUMBER := 51;
+v_roll NUMBER := 1;
 c_gst CONSTANT NUMBER := 18;
 v_index NUMBER := MOD(v_roll, 4) + 1;
 v_plan NUMBER;
