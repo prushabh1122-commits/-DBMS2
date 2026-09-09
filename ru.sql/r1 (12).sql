@@ -1,35 +1,23 @@
 SET SERVEROUTPUT ON;
-
 DECLARE
-    v_n NUMBER := 2;
-    v_last_day DATE;
-    v_next_monday DATE;
-    v_days_left NUMBER;
-
+v_roll NUMBER := 8;
+v_mark NUMBER := MOD(v_roll, 30) + 60;
+v_m1 NUMBER := v_mark;
+v_m2 NUMBER := v_mark;
+v_m3 NUMBER := v_mark;
+v_m4 NUMBER := v_mark;
+v_m5 NUMBER := NULL;
+v_total NUMBER;
+v_pct NUMBER;
+v_passed BOOLEAN;
 BEGIN
-    -- Last day of current month
-    v_last_day := LAST_DAY(SYSDATE);
-
-    -- Next Monday
-    v_next_monday := NEXT_DAY(SYSDATE, 'MONDAY');
-
-    -- Days left in month
-    v_days_left := TRUNC(v_last_day - SYSDATE);
-
-    -- Print output
-    DBMS_OUTPUT.PUT_LINE('Today: ' ||
-        TO_CHAR(SYSDATE, 'Day, DD "th" Month YYYY'));
-
-    DBMS_OUTPUT.PUT_LINE('Date after ' || v_n || ' months: ' ||
-        TO_CHAR(ADD_MONTHS(SYSDATE, v_n), 'DD-MM-YYYY'));
-
-    DBMS_OUTPUT.PUT_LINE('Last day of current month: ' ||
-        TO_CHAR(v_last_day, 'DD-MM-YYYY'));
-
-    DBMS_OUTPUT.PUT_LINE('Next Monday: ' ||
-        TO_CHAR(v_next_monday, 'DD-MM-YYYY'));
-
-    DBMS_OUTPUT.PUT_LINE('Days left in this month: ' || v_days_left);
-
+v_total := v_m1 + v_m2 + v_m3 + v_m4 + NVL(v_m5, 0);
+v_pct := ROUND(v_total / 500 * 100, 2);
+v_passed := (v_pct >= 40);
+DBMS_OUTPUT.PUT_LINE('Total: ' || v_total);
+DBMS_OUTPUT.PUT_LINE('Percentage: ' || v_pct || '%');
+-- BOOLEAN cannot be printed directly using DBMS_OUTPUT.PUT_LINE.
+DBMS_OUTPUT.PUT_LINE('Result: ' ||
+CASE WHEN v_passed THEN 'PASS' ELSE 'FAIL' END);
 END;
 /
