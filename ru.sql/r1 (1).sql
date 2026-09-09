@@ -2,7 +2,7 @@ SET SERVEROUTPUT ON;
 
 DECLARE
     v_message VARCHAR2(100) := 'Welcome to PL/SQL!';
-    v_roll_no NUMBER := 26;
+    v_roll_no NUMBER := 1;
     v_lucky_number NUMBER;
 BEGIN
     -- Calculate lucky number
