@@ -11,7 +11,7 @@ CREATE TABLE employees (
 
 -- Insert employee
 INSERT INTO employees
-VALUES (100, 'Manush', 'Mistry', 'IT_PROG', 50000);
+VALUES (100, 'rushabh', 'ambani', 'IT_PROG', 50000);
 
 COMMIT;
 
