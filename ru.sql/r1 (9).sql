@@ -15,7 +15,7 @@ BEGIN
 
     -- Print Electricity Bill
     DBMS_OUTPUT.PUT_LINE('--- TORRENT POWER BILL ---');
-    DBMS_OUTPUT.PUT_LINE('Consumer Name: Manush');
+    DBMS_OUTPUT.PUT_LINE('Consumer Name: rushabh');
     DBMS_OUTPUT.PUT_LINE('Units Consumed: ' || v_units);
     DBMS_OUTPUT.PUT_LINE('Energy Charge: Rs. ' || v_energy_charge);
     DBMS_OUTPUT.PUT_LINE('Fixed Charge: Rs. ' || c_fixed);
