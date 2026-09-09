@@ -1,7 +1,7 @@
 SET SERVEROUTPUT ON;
 
 DECLARE
-    v_name VARCHAR2(30) := 'Manush Mistry';
+    v_name VARCHAR2(30) := 'rushabh';
 
     v_m1 NUMBER := 80;
     v_m2 NUMBER := 75;
