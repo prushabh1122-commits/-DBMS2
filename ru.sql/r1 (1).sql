@@ -9,7 +9,7 @@ BEGIN
     v_lucky_number := MOD(v_roll_no, 7) + 1;
 
     -- Print name and roll number
-    DBMS_OUTPUT.PUT_LINE('Name: Manushh');
+    DBMS_OUTPUT.PUT_LINE('Name: rushabh');
     DBMS_OUTPUT.PUT_LINE('Roll Number: ' || v_roll_no);
 
     -- Print message
