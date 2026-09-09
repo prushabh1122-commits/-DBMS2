@@ -1,37 +1,53 @@
 SET SERVEROUTPUT ON;
+DECLARE
+v_roll_no NUMBER := 51;
+v_birth_month NUMBER := 6; -- Replace with your actual birth month
+v_p NUMBER;
+v_r NUMBER;
+v_t NUMBER := 3;
+v_si NUMBER;
+v_ci NUMBER;
+v_final_si NUMBER;
+v_final_ci NUMBER;
+v_diff NUMBER;
+v_diff_pct NUMBER;
+BEGIN
+v_p := v_roll_no * 1000;
+v_r := v_birth_month * 0.5 + 4;
+v_si := v_p * v_r * v_t / 100;
+v_ci := v_p * POWER(1 + v_r / 100, v_t) - v_p;
+v_final_si := v_p + v_si;
+v_final_ci := v_p + v_ci;
+v_diff := v_ci - v_si;
+v_diff_pct := (v_diff / v_si) * 100;
+DBMS_OUTPUT.PUT_LINE('==============================');
+DBMS_OUTPUT.PUT_LINE(' BANK INTEREST CALCULATOR ');
 
-DECLARE 
-    -- Part A: GST Variables 
-    c_gst_rate CONSTANT NUMBER := 18; 
-    v_base_price NUMBER := 1000; 
-    v_cgst NUMBER; 
-    v_sgst NUMBER; 
-    v_total NUMBER; 
- 
-    -- Part B: Name Variable 
-    v_name VARCHAR2(50) := 'Manush'; 
- 
-BEGIN 
-    -- Calculate GST 
-    v_cgst := v_base_price * (c_gst_rate / 2) / 100; 
-    v_sgst := v_base_price * (c_gst_rate / 2) / 100; 
-    v_total := v_base_price + v_cgst + v_sgst; 
- 
-    DBMS_OUTPUT.PUT_LINE('--- GST DETAILS ---'); 
-    DBMS_OUTPUT.PUT_LINE('Base Price: ' || v_base_price); 
-    DBMS_OUTPUT.PUT_LINE('CGST Amount (9%): ' || v_cgst); 
-    DBMS_OUTPUT.PUT_LINE('SGST Amount (9%): ' || v_sgst); 
-    DBMS_OUTPUT.PUT_LINE('Total Amount: ' || v_total); 
- 
-    -- NVL Example 
-    DBMS_OUTPUT.PUT_LINE('--- NVL EXAMPLE ---'); 
-    DBMS_OUTPUT.PUT_LINE('Name: ' || NVL(v_name, 'Unknown')); 
- 
-    -- NVL2 Example 
-    DBMS_OUTPUT.PUT_LINE('--- NVL2 EXAMPLE ---'); 
-    DBMS_OUTPUT.PUT_LINE(
-        NVL2(v_name, 'Name Known: ' || v_name, 'Name Unknown')
-    ); 
- 
+DBMS_OUTPUT.PUT_LINE('==============================');
+DBMS_OUTPUT.PUT_LINE('Principal : Rs.' ||
+TO_CHAR(v_p, '99,999'));
+DBMS_OUTPUT.PUT_LINE('Rate : ' || v_r || '%');
+DBMS_OUTPUT.PUT_LINE('Years : ' || v_t);
+DBMS_OUTPUT.PUT_LINE('Simple Interest : Rs.' ||
+TO_CHAR(v_si, '99,999.99'));
+DBMS_OUTPUT.PUT_LINE('Compound Interest : Rs.' ||
+TO_CHAR(v_ci, '99,999.99'));
+DBMS_OUTPUT.PUT_LINE('Final SI Amount : Rs.' ||
+TO_CHAR(v_final_si, '99,999.99'));
+DBMS_OUTPUT.PUT_LINE('Final CI Amount : Rs.' ||
+TO_CHAR(v_final_ci, '99,999.99'));
+DBMS_OUTPUT.PUT_LINE('SI vs CI Difference : Rs.' ||
+TO_CHAR(v_diff, '99,999.99'));
+DBMS_OUTPUT.PUT_LINE('Difference % : ' ||
+ROUND(v_diff_pct, 2) || '%');
+IF v_ci > v_si * 1.10 THEN
+DBMS_OUTPUT.PUT_LINE(
+'Tip: FD is better than savings account for this amount.'
+);
+ELSE
+DBMS_OUTPUT.PUT_LINE(
+'Tip: Difference is not more than 10%.'
+);
+END IF;
 END;
 /
