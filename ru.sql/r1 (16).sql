@@ -1,33 +1,23 @@
 SET SERVEROUTPUT ON;
-
 DECLARE
-    v_amount NUMBER := 2700;
-
-    n500 NUMBER;
-    n200 NUMBER;
-    n100 NUMBER;
-    v_rem NUMBER;
-
+v_roll NUMBER := 51;
+v_id NUMBER := ((v_roll + 2) MOD 11 + 1) * 10;
+v_dname departments.department_name%TYPE;
+v_loc departments.location_id%TYPE;
 BEGIN
-    -- Rs.500 notes
-    n500 := TRUNC(v_amount / 500);
-    v_rem := MOD(v_amount, 500);
-
-    -- Rs.200 notes
-    n200 := TRUNC(v_rem / 200);
-    v_rem := MOD(v_rem, 200);
-
-    -- Rs.100 notes
-    n100 := TRUNC(v_rem / 100);
-    v_rem := MOD(v_rem, 100);
-
-    -- Print note breakup
-    DBMS_OUTPUT.PUT_LINE('--- ATM NOTE BREAKUP ---');
-    DBMS_OUTPUT.PUT_LINE('Amount: Rs. ' || v_amount);
-    DBMS_OUTPUT.PUT_LINE('Rs.500 Notes: ' || n500);
-    DBMS_OUTPUT.PUT_LINE('Rs.200 Notes: ' || n200);
-    DBMS_OUTPUT.PUT_LINE('Rs.100 Notes: ' || n100);
-    DBMS_OUTPUT.PUT_LINE('Remaining Amount: Rs. ' || v_rem);
-
+BEGIN
+SELECT department_name, location_id
+INTO v_dname, v_loc
+FROM departments
+WHERE department_id = v_id;
+DBMS_OUTPUT.PUT_LINE('Dept ' || v_id || ': ' ||
+v_dname || ' at location ' || v_loc);
+EXCEPTION
+WHEN NO_DATA_FOUND THEN
+DBMS_OUTPUT.PUT_LINE('No department found for ID ' || v_id);
+END;
+-- %TYPE automatically follows the datatype/size of the referenced column.
+-- Therefore changing department_name from VARCHAR2(30) to VARCHAR2(60)
+-- does not require changing this declaration.
 END;
 /
