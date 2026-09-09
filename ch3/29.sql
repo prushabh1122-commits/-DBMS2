@@ -1,0 +1,6 @@
+| **Heading**                                 | **Implicit Cursor**                                             | **Explicit (Simple) Cursor**             | **Parameterised Cursor**                    |
+| ------------------------------------------- | --------------------------------------------------------------- | ---------------------------------------- | ------------------------------------------- |
+| **Who declares it?**                        | Oracle automatically declares it.                               | Programmer declares it.                  | Programmer declares it with parameters.     |
+| **Who opens and closes it?**                | Oracle automatically opens and closes it.                       | Programmer opens and closes it manually. | Programmer opens and closes it manually.    |
+| **Can it be reused with different values?** | No                                                              | No                                       | Yes                                         |
+| **Best situation to use**                   | Simple SQL operations such as `INSERT`, `UPDATE`, and `DELETE`. | Processing multiple rows one by one.     | Using the same query with different values. |
